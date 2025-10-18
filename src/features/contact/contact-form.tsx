@@ -1,20 +1,7 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
-import { Send, MapPin, Clock, LucideIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { MapPin, Clock, LucideIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
 import { staggerContainer, staggerItem } from '@/lib/motion'
-import {
-  ContactForm as ContactFormType,
-  contactFormSchema,
-} from '@/lib/schemas'
-import { useToast } from '@/hooks/use-toast'
 
 interface ContactFormProps {
   profile: {
@@ -25,58 +12,6 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ profile }: ContactFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormType>({
-    resolver: zodResolver(contactFormSchema),
-  })
-
-  const onSubmit = async (data: ContactFormType) => {
-    setIsSubmitting(true)
-
-    try {
-      // Simulate API call with security considerations
-      await new Promise(resolve => setTimeout(resolve, 2000))
-
-      // In a real app, you would:
-      // 1. Send to your backend API (not directly to email)
-      // 2. Implement rate limiting and CAPTCHA
-      // 3. Sanitize input data
-      // 4. Log attempts for security monitoring
-      // 5. Use environment variables for sensitive data
-
-      console.log('Contact form data:', {
-        ...data,
-        timestamp: new Date().toISOString(),
-        // Never log sensitive data in production
-      })
-
-      toast({
-        title: 'Message sent successfully!',
-        description:
-          "Thank you for reaching out. I'll get back to you within 24 hours.",
-        variant: 'success',
-      })
-
-      reset()
-    } catch (error) {
-      toast({
-        title: 'Error sending message',
-        description:
-          'Please try again later or contact me directly via LinkedIn.',
-        variant: 'destructive',
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   type ContactInfo = {
     icon: LucideIcon
     label: string
@@ -166,123 +101,6 @@ export function ContactForm({ profile }: ContactFormProps) {
             ))}
           </div>
         </div>
-      </motion.div>
-
-      {/* Contact Form */}
-      <motion.div variants={staggerItem}>
-        <Card className="border-purple-400/20 bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Send className="h-5 w-5 text-purple-400" />
-              Send a Message
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium text-slate-300"
-                  >
-                    Name *
-                  </label>
-                  <Input
-                    id="name"
-                    {...register('name')}
-                    placeholder="Your name"
-                    className={cn(errors.name && 'border-destructive')}
-                  />
-                  {errors.name && (
-                    <p className="text-sm text-destructive">
-                      {errors.name.message}
-                    </p>
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-medium text-slate-300"
-                  >
-                    Email *
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    {...register('email')}
-                    placeholder="your@email.com"
-                    className={cn(errors.email && 'border-destructive')}
-                  />
-                  {errors.email && (
-                    <p className="text-sm text-destructive">
-                      {errors.email.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="subject"
-                  className="text-sm font-medium text-slate-300"
-                >
-                  Subject *
-                </label>
-                <Input
-                  id="subject"
-                  {...register('subject')}
-                  placeholder="What's this about?"
-                  className={cn(errors.subject && 'border-destructive')}
-                />
-                {errors.subject && (
-                  <p className="text-sm text-destructive">
-                    {errors.subject.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-medium text-slate-300"
-                >
-                  Message *
-                </label>
-                <Textarea
-                  id="message"
-                  {...register('message')}
-                  placeholder="Tell me about your project or question..."
-                  rows={6}
-                  className={cn(errors.message && 'border-destructive')}
-                />
-                {errors.message && (
-                  <p className="text-sm text-destructive">
-                    {errors.message.message}
-                  </p>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="group w-full"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </>
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
       </motion.div>
     </motion.div>
   )
