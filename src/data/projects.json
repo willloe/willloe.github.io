@@ -294,5 +294,87 @@
     "endDate": "2025-05-08",
     "tags": ["Research", "Graph Algorithms", "Information Diffusion", "GPU"],
     "kind": "paper"
+  },
+  {
+    "slug": "pathology-controllable-mri-seg-guided-diffusion",
+    "title": "Pathology-Controllable Brain MRI Synthesis (Segmentation-Guided Diffusion)",
+    "summary": "Generated patient-specific counterfactual brain MRIs by removing tumors while preserving anatomy using segmentation-guided diffusion + Mask-Ablated Training (MAT).",
+    "description": "Built an end-to-end pipeline for pathology-controllable MRI synthesis on BraTS 2021 (T2-FLAIR), training an unconditional diffusion baseline (M1), a segmentation-guided model (M2), and a MAT variant (M3) that learns to inpaint healthy tissue when tumor labels are removed. Evaluated realism and counterfactual quality using FID/KID/SSIM plus segmentation-based metrics (GenDice, TumorResidual, DiffMap IoU) computed via a separate referee U-Net (M4).",
+    "tech": [
+      "PyTorch",
+      "Hugging Face",
+      "Diffusers",
+      "DDPM",
+      "U-Net",
+      "BraTS 2021",
+      "NumPy",
+      "Pandas",
+      "SciPy",
+      "Matplotlib",
+      "Weights & Biases",
+      "nibabel",
+      "ANTs / Atropos",
+      "Python"
+    ],
+    "highlights": [
+      "Tumor-aware preprocessing pipeline: 3D volumes -> 2D slice/mask pairs with tissue + tumor labels (GM/WM/CSF/tumor).",
+      "Mask-Ablated Training enables reliable tumor-removal counterfactuals by training on edited masks.",
+      "MAT improved global realism (FID ~76 -> ~58) and reduced counterfactual abnormality (TumorResidual ~1.62 -> ~0.55) while maintaining strong anatomical fidelity.",
+      "Introduced counterfactual-focused evaluation with TumorResidual and DiffMap IoU alongside FID/KID/SSIM and GenDice."
+    ],
+    "links": {
+      "demo": "",
+      "repo": "https://github.com/PranavShashidhara/Seg_diffusion",
+      "caseStudy": "./projects/papers/MSML612_Final_Report.pdf"
+    },
+    "images": ["./projects/papers/612_ss.png"],
+    "featured": false,
+    "status": "completed",
+    "startDate": "2025-09-01",
+    "endDate": "2025-12-15",
+    "tags": ["Research", "Diffusion", "Medical Imaging", "Computer Vision", "Generative AI"],
+    "kind": "paper"
+  },
+  {
+    "slug": "slidesafe-layout-aware-slide-background-generation",
+    "title": "SlideSafe – Classifier + Diffusion Pipeline for Presentation Backgrounds",
+    "summary": "Layout-aware slide understanding + SDXL generation that keeps title/body regions readable while preserving style.",
+    "description": "Developed a two-stage system that (1) parses slides into structured layouts using YOLO-OBB for visual regions and EasyOCR + Random Forest for semantic text roles, then (2) generates slide-safe backgrounds using SDXL with LoRA adaptation and layout conditioning (ControlNet + safe-zone smoothing). Evaluated readability improvements with safe-zone intensity variance and WCAG-style contrast checks across matched A/B generations.",
+    "tech": [
+      "PyTorch",
+      "SDXL",
+      "LoRA",
+      "ControlNet",
+      "YOLO-OBB",
+      "EasyOCR",
+      "Scikit-learn",
+      "Random Forest",
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "SlideVQA",
+      "AI2D",
+      "Logo-2K+",
+      "DTD (Describable Textures Dataset)",
+      "Python"
+    ],
+    "highlights": [
+      "Text-role classifier (EasyOCR + Random Forest) achieved ~81.9% test accuracy on SlideVQA.",
+      "Visual detection with YOLO-OBB: fine-tuned node detector reached mAP50 ~0.95 on real lecture slides.",
+      "Layout-aware diffusion reduced safe-zone variance by ~28% (0.138 -> 0.097) and improved safe-zone contrast pass rates (WCAG-style).",
+      "Cross-modal fusion (vision + text) boosted total detections from 33 to 117 and added semantic labels (e.g., Title/Caption) for interpretability."
+    ],
+    "links": {
+      "demo": "",
+      "repo": "https://github.com/willloe/MSML640_Group10",
+      "caseStudy": "./projects/papers/MSML640_Final_Report.pdf"
+    },
+    "images": ["./projects/papers/640_ss.png"],
+    "featured": false,
+    "status": "completed",
+    "startDate": "2025-09-01",
+    "endDate": "2025-12-15",
+    "tags": ["Computer Vision", "Diffusion", "Generative AI", "UX", "Automation"],
+    "kind": "paper"
   }
 ]

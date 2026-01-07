@@ -117,8 +117,17 @@
     "startDate": "2024-08-01",
     "endDate": "2026-05-31",
     "current": true,
-    "description": "Graduate studies in Applied Machine Learning; GPA 3.89; Phi Kappa Phi.",
-    "highlights": [],
+    "description": "M.S. Applied Machine Learning (UMD). GPA 3.89. Phi Kappa Phi Honor Society. Focus: ML systems + deep learning (CV/NLP).",
+    "highlights": [
+      "MSML601 Probability & Statistics (A)",
+      "MSML603 Principles of Machine Learning (A)",
+      "MSML604 Introduction to Optimization (B+)",
+      "MSML605 Computer Systems for Machine Learning (A+)",
+      "MSML606 Algorithms & Data Structures (A+)",
+      "MSML612 Deep Learning (A-)",
+      "MSML640 Computer Vision (A+)",
+      "MSML641 Natural Language Processing (A)"
+    ],
     "type": "education"
   },
   {
